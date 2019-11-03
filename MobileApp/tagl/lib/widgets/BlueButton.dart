@@ -4,17 +4,15 @@ import 'package:tagl/utilities/FontStyles.dart';
 import 'package:tagl/widgets/SlideUpRoute.dart';
 
 class BlueButton extends StatelessWidget {
-  final Widget navigate;
+  final Function callback;
   final String text;
 
-  BlueButton({this.navigate, this.text});
+  BlueButton({this.callback, this.text});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(SlideUpRoute(widget: navigate));
-      },
+      onTap: callback,
       child: Container(
         alignment: Alignment(0, 0),
         decoration: BoxDecoration(
