@@ -75,7 +75,7 @@ class _DashboardState extends State<Dashboard> {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: NavigationBar(),
+              child: NavigationBar(page: 1),
             )
           ],
         )),
