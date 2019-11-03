@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tagl/pages/Briefing.dart';
 import 'package:tagl/utilities/AppColors.dart';
 import 'package:tagl/widgets/Gallery.dart';
 import 'package:tagl/widgets/NavigationBar.dart';
 import 'package:tagl/widgets/SearchBox.dart';
+import 'package:tagl/widgets/SlideUpRoute.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -33,7 +35,8 @@ class _DashboardState extends State<Dashboard> {
                 children: <Widget>[
                   Gallery(),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8, top: 42, bottom: 28),
+                    padding:
+                        const EdgeInsets.only(left: 8, top: 42, bottom: 28),
                     child: Text(
                       "Modules",
                       style: TextStyle(color: Colors.white, fontSize: 24),
@@ -44,15 +47,20 @@ class _DashboardState extends State<Dashboard> {
                       //physics: const NeverScrollableScrollPhysics(),
                       itemCount: 3,
                       itemBuilder: (context, index) {
-                        return Container(
-                          width: 1.0 / 0.0,
-                          height: 198,
-                          margin: EdgeInsets.fromLTRB(8, 0, 8, 14),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: AppColors.gray),
-                          child: Center(child: Text("module")),
-                        );
+                        return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(SlideUpRoute(widget: Briefing()));
+                            },
+                            child: Container(
+                              width: 1.0 / 0.0,
+                              height: 198,
+                              margin: EdgeInsets.fromLTRB(8, 0, 8, 14),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: AppColors.gray),
+                              child: Center(child: Text("module")),
+                            ));
                       },
                     ),
                   )
@@ -62,8 +70,8 @@ class _DashboardState extends State<Dashboard> {
             Align(
               alignment: Alignment.topCenter,
               child: SearchBox(
-                  query: this.query,
-                ),
+                query: this.query,
+              ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
