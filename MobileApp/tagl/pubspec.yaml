@@ -26,6 +26,7 @@ dependencies:
   audio_recorder: ^1.0.1
   path_provider: ^1.4.0
   http: ^0.12.0+2
+  flutter_uploader: ^1.1.0
 
 dev_dependencies:
   flutter_test:
