@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tagl/pages/Dashboard.dart';
+import 'package:tagl/pages/Evaluation.dart';
 import 'package:tagl/pages/Leaderboard.dart';
 import 'package:tagl/utilities/AppColors.dart';
 import 'package:tagl/widgets/FadeInRoute.dart';
@@ -18,16 +19,18 @@ class NavigationBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           IconButton(
-            onPressed: () => {
+            onPressed: () {
               Navigator.of(context)
-                  .pushReplacement(FadeInRoute(widget: Dashboard()))
+                  .pushReplacement(FadeInRoute(widget: Dashboard()));
             },
             icon: Icon(Icons.home),
             color: page == 1 ? AppColors.active : Colors.white,
             iconSize: 52,
           ),
           IconButton(
-            onPressed: () => {},
+            onPressed: () {
+              Navigator.of(context).push(FadeInRoute(widget: Evaluation()));
+            },
             icon: Icon(Icons.format_list_bulleted),
             color: page == 2 ? AppColors.active : Colors.white,
             iconSize: 52,

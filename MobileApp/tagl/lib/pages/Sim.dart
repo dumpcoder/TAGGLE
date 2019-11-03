@@ -1,13 +1,16 @@
 import 'dart:io';
-
 import 'package:audio_recorder/audio_recorder.dart';
 import 'package:file/local.dart';
 import 'package:flutter/material.dart';
 import 'package:tagl/pages/Evaluation.dart';
 import 'package:tagl/utilities/AppColors.dart';
 import 'package:tagl/utilities/FontStyles.dart';
-
 import '../widgets/BlueButton.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+import 'package:path/path.dart';
+import 'dart:convert';
+import 'package:async/async.dart';
 
 class Sim extends StatefulWidget {
   @override
@@ -34,17 +37,36 @@ class _SimState extends State<Sim> {
     setState(() {});
   }
 
-  submitRecording(){
-    if(recording == null){
+  submitRecording() async {
+    if (recording == null) {
       return;
-    }else if(isRecording){
+    } else if (isRecording) {
       stopRecording();
     }
 
-    File rf = File('recording.wav');
-    print(rf.path);
+    print("aklsjdfhkasjfhkl");
 
-  
+    File rf = File('recording.wav');
+
+    var url = "http://tomas3torres.com:5000/wav-to-flac";
+
+    var stream = new http.ByteStream(DelegatingStream.typed(rf.openRead()));
+    var length = await rf.length();
+    var request = new http.MultipartRequest("POST", Uri.parse(url));
+    var multipartFile = new http.MultipartFile('wavFile', stream, length,
+        filename: basename(rf.path));
+    request.files.add(multipartFile);
+    request.send().then((response) async {
+      String responseString = await response.stream.bytesToString();
+      print(responseString);
+
+      // Map<String, dynamic> responseJSON = jsonDecode(responseString);
+      // String submission = responseJSON['submission'];
+
+      print("THINGYYY");
+
+      print(rf.path);
+    });
   }
 
   @override
@@ -82,13 +104,10 @@ class _SimState extends State<Sim> {
                   alignment: Alignment(0, 0),
                   child: Icon(Icons.mic, size: 100, color: Colors.white),
                 ),
-             
-                   Container(
-                    margin: EdgeInsets.all(20),
-                    child:
-                        BlueButton(callback: submitRecording, text: "Submit"),
-                  ),
-                
+                Container(
+                  margin: EdgeInsets.all(20),
+                  child: BlueButton(callback: submitRecording, text: "Submit"),
+                ),
               ],
             ),
 
