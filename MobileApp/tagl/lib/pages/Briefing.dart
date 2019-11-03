@@ -3,6 +3,7 @@ import 'package:tagl/pages/Sim.dart';
 import 'package:tagl/utilities/AppColors.dart';
 import 'package:tagl/utilities/FontStyles.dart';
 import 'package:tagl/widgets/BlueButton.dart';
+import 'package:tagl/widgets/SlideUpRoute.dart';
 
 class Briefing extends StatefulWidget {
   @override
@@ -86,7 +87,12 @@ class _BriefingState extends State<Briefing> {
                                   )
                                 ],
                               )),
-                          BlueButton(text: "Record Answer", navigate: Sim()),
+                          BlueButton(
+                              text: "Record Answer",
+                              callback: () {
+                                Navigator.of(context)
+                                    .push(SlideUpRoute(widget: Sim()));
+                              }),
                         ],
                       ))
                 ],
