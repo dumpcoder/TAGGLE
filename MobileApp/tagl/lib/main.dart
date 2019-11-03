@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tagl/pages/Dashboard.dart';
+import 'package:tagl/pages/Sim.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: Dashboard(),
+      home: Sim(),
     );
   }
 }
